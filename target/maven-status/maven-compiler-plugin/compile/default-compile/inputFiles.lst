@@ -1,0 +1,10 @@
+D:\Desarrollo\Proyectos\TaskManager\taskmanager\src\main\java\com\mimacom\taskmanager\model\mapper\TaskMapper.java
+D:\Desarrollo\Proyectos\TaskManager\taskmanager\src\main\java\com\mimacom\taskmanager\LoadDatabase.java
+D:\Desarrollo\Proyectos\TaskManager\taskmanager\src\main\java\com\mimacom\taskmanager\controller\dto\TaskDTO.java
+D:\Desarrollo\Proyectos\TaskManager\taskmanager\src\main\java\com\mimacom\taskmanager\exception\TaskNotFoundException.java
+D:\Desarrollo\Proyectos\TaskManager\taskmanager\src\main\java\com\mimacom\taskmanager\service\TaskService.java
+D:\Desarrollo\Proyectos\TaskManager\taskmanager\src\main\java\com\mimacom\taskmanager\service\impl\TaskServiceImpl.java
+D:\Desarrollo\Proyectos\TaskManager\taskmanager\src\main\java\com\mimacom\taskmanager\TaskmanagerApplication.java
+D:\Desarrollo\Proyectos\TaskManager\taskmanager\src\main\java\com\mimacom\taskmanager\model\Task.java
+D:\Desarrollo\Proyectos\TaskManager\taskmanager\src\main\java\com\mimacom\taskmanager\repository\TaskRepository.java
+D:\Desarrollo\Proyectos\TaskManager\taskmanager\src\main\java\com\mimacom\taskmanager\controller\TaskController.java
