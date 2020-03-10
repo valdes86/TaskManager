@@ -29,7 +29,7 @@ public interface TaskService {
 	 * 
 	 * @param id The id of the task to remove
 	 */
-	void removeTask(Long id);
+	Task removeTask(Long id);
 	
 	/**
 	 * Finds all the saved tasks

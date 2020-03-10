@@ -1,5 +1,6 @@
 package com.mimacom.taskmanager.controller.dto;
 
+
 public class TaskDTO {
 
 	private String title;

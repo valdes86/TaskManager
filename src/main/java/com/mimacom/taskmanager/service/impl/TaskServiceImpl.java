@@ -50,11 +50,12 @@ public class TaskServiceImpl implements TaskService {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void removeTask(Long taskId) {
+	public Task removeTask(Long taskId) {
 		Task task = taskRepository.findById(taskId)
 				.orElseThrow(TaskNotFoundException::new);
 
 		taskRepository.delete(task);
+		return task;
 	}
 
 	@Override

@@ -5,6 +5,8 @@ import com.mimacom.taskmanager.model.Task;
 
 public class TaskMapper {
 
+	private TaskMapper() {}
+	
 	/**
 	 * Maps a <code>Task</code> object as <code>TaskDTO</code> object
 	 * @param task The Task object
