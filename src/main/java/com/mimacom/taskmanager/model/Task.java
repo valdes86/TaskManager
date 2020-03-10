@@ -2,6 +2,7 @@ package com.mimacom.taskmanager.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,6 +14,7 @@ import lombok.Data;
 public class Task {
 
 	@Id
+	@GeneratedValue
 	@Column(name = "ID_TASK")
 	private Long idTask;
 	@Column(name = "TITLE")
@@ -35,4 +37,6 @@ public class Task {
 		this.done = done;
 		this.finished = finished;
 	}
+	
+	//Getters, setters, hascode and equals constructed by Lombock
 }
