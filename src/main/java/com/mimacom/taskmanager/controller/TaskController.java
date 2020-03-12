@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,7 +41,7 @@ public class TaskController {
 			@ApiResponse(code=404, message="Task not found"),
 			@ApiResponse(code=500, message="Server error")
 	})
-	public ResponseEntity<Task> createTask(TaskDTO taskDto) {
+	public ResponseEntity<Task> createTask(@RequestBody TaskDTO taskDto) {
 		logger.info("Creating Task");
 		Task task = taskService.createTask(taskDto);
 		return task == null? ResponseEntity.notFound().build() : ResponseEntity.ok(task);	
@@ -53,7 +54,7 @@ public class TaskController {
 			@ApiResponse(code=404, message="Task not found"),
 			@ApiResponse(code=500, message="Server error")
 	})
-	public ResponseEntity<Task> updateTask(TaskDTO taskDto, @PathVariable Long id) {
+	public ResponseEntity<Task> updateTask(@RequestBody TaskDTO taskDto, @PathVariable Long id) {
 		logger.info("Updating task: {}", id);
 		Task task = taskService.updateTask(taskDto, id);
 		return task == null? ResponseEntity.notFound().build() : ResponseEntity.ok(task);
