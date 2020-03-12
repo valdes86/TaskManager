@@ -21,4 +21,6 @@ public class AppConfiguration {
           .paths(PathSelectors.any())                          
           .build();                                           
     }
+	
+	
 }
