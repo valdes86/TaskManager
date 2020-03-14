@@ -39,6 +39,12 @@ public class Task {
 	public Task() {
 		super();
 	}
+	
+	public Task(String title, String description) {
+		super();
+		this.title = title;
+		this.description = description;
+	}
 
 	public Task(String title, String description, Boolean done, Boolean finished) {
 		super();
@@ -47,6 +53,17 @@ public class Task {
 		this.done = done;
 		this.finished = finished;
 	}
+
+	public Task(Long idTask, String title, String description, Boolean done, Boolean finished) {
+		super();
+		this.idTask = idTask;
+		this.title = title;
+		this.description = description;
+		this.done = done;
+		this.finished = finished;
+	}
+
+	
 	
 	//Getters, setters, hascode and equals constructed by Lombock
 }
