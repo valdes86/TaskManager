@@ -21,7 +21,6 @@ public class Task {
 	@GeneratedValue
 	@Column(name = "ID_TASK")
 	@ApiModelProperty("Task id. value")
-	@NotNull
 	private Long idTask;
 	@Column(name = "TITLE")
 	@ApiModelProperty("Title of the task")
