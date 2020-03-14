@@ -17,22 +17,27 @@ import java.util.Optional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.json.JacksonJsonParser;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mimacom.taskmanager.controller.TaskController;
 import com.mimacom.taskmanager.model.Task;
+import com.mimacom.taskmanager.model.User;
 import com.mimacom.taskmanager.repository.TaskRepository;
 import com.mimacom.taskmanager.service.TaskService;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(controllers = TaskController.class)
-@WebAppConfiguration
+@SpringBootTest
+@AutoConfigureMockMvc
 public class TaskManagerAPITests {
 
 	private static final String APPLICATION_JSON = "application/json";
@@ -47,14 +52,33 @@ public class TaskManagerAPITests {
 	TaskRepository taskRepository;
 
 	@Test
-	public void createTaskTest() throws Exception {
+	public void createTaskTestNotAuthorized() throws Exception{
+		
+		Task task1 = new Task(1L, "Mock", "this is a mocked task", Boolean.TRUE, Boolean.TRUE);
+
+		 ObjectMapper objectMapper = new ObjectMapper();
+	        String json = objectMapper.writeValueAsString(task1);
+		
+	        this.mockMvc.perform(post("/task/Create")
+	        		.contentType(MediaType.APPLICATION_JSON)
+				    .content(json)
+				    .characterEncoding("utf-8"))
+					.andExpect(status().isOk())
+					.andExpect(content().contentType(APPLICATION_JSON))
+					.andExpect(jsonPath("$.idTask", is(1)));
+	}
+	
+	@Test
+	public void createTaskTestAthorized() throws Exception {
 		Task task1 = new Task(1L, "Mock", "this is a mocked task", Boolean.TRUE, Boolean.TRUE);
 
 		 ObjectMapper objectMapper = new ObjectMapper();
 	        String json = objectMapper.writeValueAsString(task1);
 
-		this.mockMvc
-				.perform(post("/task/Create").contentType(APPLICATION_JSON)
+	    String accessToken = obtainAccessToken ("user", "password");
+	    
+		this.mockMvc.perform(post("/task/Create").contentType(APPLICATION_JSON)
+						.header("Authorization", "Bearer " + accessToken)
 						.contentType(MediaType.APPLICATION_JSON)
 					    .content(json)
 					    .characterEncoding("utf-8"))
@@ -145,5 +169,26 @@ public class TaskManagerAPITests {
 		this.mockMvc.perform(put("/task/finish/{}", 1L))
 			.andExpect(content().contentType(APPLICATION_JSON))
 			.andExpect(status().isOk());
+	}
+	
+	private String obtainAccessToken(String username, String password) throws Exception {
+	 
+		User user = new User("user", "password");
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(user);
+        
+	    ResultActions result 
+	      = mockMvc.perform(post("/authenticate")
+	    		  .contentType(MediaType.APPLICATION_JSON)
+				  .content(json)
+				  .characterEncoding("utf-8"))
+				  .andExpect(status().isOk())
+				  .andExpect(content().contentType(APPLICATION_JSON));
+	 
+	    String resultString = result.andReturn().getResponse().getContentAsString();
+	 
+	    JacksonJsonParser jsonParser = new JacksonJsonParser();
+	    return jsonParser.parseMap(resultString).get("access_token").toString();
 	}
 }

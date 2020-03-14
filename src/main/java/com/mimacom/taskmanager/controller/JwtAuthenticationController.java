@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mimacom.taskmanager.config.JwtTokenUtil;
-import com.mimacom.taskmanager.model.JwtRequest;
+import com.mimacom.taskmanager.controller.dto.UserDTO;
 import com.mimacom.taskmanager.model.JwtResponse;
 import com.mimacom.taskmanager.model.Task;
 import com.mimacom.taskmanager.service.JwtUserDetailsService;
@@ -40,7 +40,7 @@ public class JwtAuthenticationController {
 			@ApiResponse(code=200, message="Succesfully authenticated"),
 			@ApiResponse(code=500, message="Server error")
 	})
-	public ResponseEntity<JwtResponse> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+	public ResponseEntity<JwtResponse> createAuthenticationToken(@RequestBody UserDTO authenticationRequest) throws Exception {
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 		final String token = jwtTokenUtil.generateToken(userDetails);
