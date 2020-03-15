@@ -12,11 +12,11 @@
 target/
 
 #Eclipse files
-**/.project
-**/.classpath
-**/.settings/
+.project
+.classpath
+.settings/
 blog/bin/
-**/.tern-project
+.tern-project
 
 #IntelliJ files
 **/*.iml
