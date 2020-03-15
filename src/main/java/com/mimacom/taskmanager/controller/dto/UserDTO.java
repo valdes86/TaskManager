@@ -1,8 +1,8 @@
-package com.mimacom.taskmanager.model;
+package com.mimacom.taskmanager.controller.dto;
 
 import java.io.Serializable;
 
-public class JwtRequest implements Serializable {
+public class UserDTO implements Serializable {
 
 	private static final long serialVersionUID = -8887341757215009074L;
 	
@@ -10,10 +10,10 @@ public class JwtRequest implements Serializable {
 	private String password;
 
 //need default constructor for JSON Parsing
-	public JwtRequest() {
+	public UserDTO() {
 	}
 
-	public JwtRequest(String username, String password) {
+	public UserDTO(String username, String password) {
 		this.setUsername(username);
 		this.setPassword(password);
 	}

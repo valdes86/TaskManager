@@ -1,10 +1,5 @@
+com\mimacom\taskmanager\controller\dto\TaskDTO.class
 com\mimacom\taskmanager\service\TaskService.class
 com\mimacom\taskmanager\model\Task.class
-com\mimacom\taskmanager\LoadDatabase.class
-com\mimacom\taskmanager\model\mapper\TaskMapper.class
-com\mimacom\taskmanager\controller\dto\TaskDTO.class
-com\mimacom\taskmanager\exception\TaskNotFoundException.class
-com\mimacom\taskmanager\service\impl\TaskServiceImpl.class
-com\mimacom\taskmanager\repository\TaskRepository.class
-com\mimacom\taskmanager\TaskmanagerApplication.class
+com\mimacom\taskmanager\model\Task$TaskBuilder.class
 com\mimacom\taskmanager\controller\TaskController.class

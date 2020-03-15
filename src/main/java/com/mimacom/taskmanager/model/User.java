@@ -74,4 +74,9 @@ public class User implements UserDetails {
 		return true;
 
 	}
+	public User(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
 }

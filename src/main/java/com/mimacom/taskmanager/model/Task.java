@@ -1,5 +1,8 @@
 package com.mimacom.taskmanager.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,10 +12,16 @@ import javax.validation.constraints.NotNull;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "TASK")
 @ApiModel("Task entity")
 public class Task {
@@ -36,17 +45,5 @@ public class Task {
 	@ApiModelProperty("Flag for FINISHED property, default: false")
 	private Boolean finished;
 
-	public Task() {
-		super();
-	}
-
-	public Task(String title, String description, Boolean done, Boolean finished) {
-		super();
-		this.title = title;
-		this.description = description;
-		this.done = done;
-		this.finished = finished;
-	}
-	
 	//Getters, setters, hascode and equals constructed by Lombock
 }
