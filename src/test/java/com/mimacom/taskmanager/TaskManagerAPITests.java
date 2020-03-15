@@ -1,6 +1,5 @@
 package com.mimacom.taskmanager;
 
-import static org.hamcrest.CoreMatchers.any;
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -32,7 +31,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mimacom.taskmanager.controller.dto.TaskDTO;
 import com.mimacom.taskmanager.controller.dto.UserDTO;
 import com.mimacom.taskmanager.model.Task;
-import com.mimacom.taskmanager.model.mapper.TaskMapper;
 import com.mimacom.taskmanager.service.TaskService;
 
 @RunWith(SpringRunner.class)
