@@ -22,6 +22,6 @@ public class TaskMapper {
 	 * @return the Task object
 	 */
 	public static Task toTask(TaskDTO task) {
-		return new Task(task.getTitle(), task.getDescription(), task.isDone(), task.isFinished());		
+		return new Task(null, task.getTitle(), task.getDescription(), task.isDone(), task.isFinished());		
 	}
 }

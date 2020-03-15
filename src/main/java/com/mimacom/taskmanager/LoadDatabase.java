@@ -18,35 +18,39 @@ import com.mimacom.taskmanager.repository.UserRepository;
 @Configuration
 @Slf4j
 class LoadDatabase {
-	
+
 	@Bean
 	PasswordEncoder getEncoder() {
-	    return new BCryptPasswordEncoder();
+		return new BCryptPasswordEncoder();
 	}
-	
-  private static final String PRELOADING_TEXT = "Preloading ";
- 
-  @Bean
-  CommandLineRunner initDatabase(TaskRepository taskRepository, UserRepository userRepository) {
-	 
-    return args -> {
-      
-      log.info(PRELOADING_TEXT + taskRepository.save(new Task("Task1", "First Task created", Boolean.FALSE, Boolean.FALSE)));
-      log.info(PRELOADING_TEXT + taskRepository.save(new Task("Task2", "Second Task created", Boolean.FALSE, Boolean.FALSE)));
-      log.info(PRELOADING_TEXT + taskRepository.save(new Task("Task3", "Third task created (done task)", Boolean.TRUE, Boolean.FALSE)));
-      log.info(PRELOADING_TEXT + taskRepository.save(new Task("Task4", "Forth task created (finished task)", Boolean.FALSE, Boolean.TRUE)));
-      log.info(PRELOADING_TEXT + taskRepository.save(new Task("Task5", "Fifth task created (done and finished)", Boolean.TRUE, Boolean.TRUE)));
-    
-      log.info(PRELOADING_TEXT + userRepository.save(User.builder()
-              .username("user")
-              .password(getEncoder().encode("password"))
-              .roles(Arrays.asList( "ROLE_USER"))
-              .build()));
-      log.info(PRELOADING_TEXT + userRepository.save(User.builder()
-              .username("admin")
-              .password(getEncoder().encode("password"))
-              .roles(Arrays.asList("ROLE_USER", "ROLE_ADMIN"))
-              .build()));
-    };
-  }
+
+	private static final String PRELOADING_TEXT = "Preloading ";
+
+	@Bean
+	CommandLineRunner initDatabase(TaskRepository taskRepository, UserRepository userRepository) {
+
+		return args -> {
+
+			// TASKS
+			log.info(PRELOADING_TEXT + taskRepository.save(Task.builder().title("Task1").description("First Task")
+					.done(Boolean.FALSE).finished(Boolean.FALSE).build()));
+			log.info(PRELOADING_TEXT + taskRepository.save(Task.builder().title("Task2").description("Second Task ")
+					.done(Boolean.FALSE).finished(Boolean.FALSE).build()));
+			log.info(PRELOADING_TEXT + taskRepository.save(Task.builder().title("Task3")
+					.description("Third task created (done task)").done(Boolean.TRUE).finished(Boolean.FALSE).build()));
+			log.info(PRELOADING_TEXT + taskRepository
+					.save(Task.builder().title("Task4").description("Fourth task created (finished task)")
+							.done(Boolean.FALSE).finished(Boolean.TRUE).build()));
+			log.info(PRELOADING_TEXT + taskRepository
+					.save(Task.builder().title("Task5").description("Fifth task created (done and finished)")
+							.done(Boolean.TRUE).finished(Boolean.TRUE).build()));
+
+			// USERS
+			log.info(PRELOADING_TEXT + userRepository.save(User.builder().username("user")
+					.password(getEncoder().encode("password")).roles(Arrays.asList("ROLE_USER")).build()));
+			log.info(PRELOADING_TEXT
+					+ userRepository.save(User.builder().username("admin").password(getEncoder().encode("password"))
+							.roles(Arrays.asList("ROLE_USER", "ROLE_ADMIN")).build()));
+		};
+	}
 }

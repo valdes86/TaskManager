@@ -2,6 +2,8 @@ package com.mimacom.taskmanager.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +43,7 @@ public class TaskController {
 			@ApiResponse(code=404, message="Task not found"),
 			@ApiResponse(code=500, message="Server error")
 	})
-	public ResponseEntity<Task> createTask(@RequestBody TaskDTO taskDto) {
+	public ResponseEntity<Task> createTask(@RequestBody @Valid TaskDTO taskDto) {
 		logger.info("Creating Task");
 		Task task = taskService.createTask(taskDto);
 		return task == null? ResponseEntity.notFound().build() : ResponseEntity.ok(task);	

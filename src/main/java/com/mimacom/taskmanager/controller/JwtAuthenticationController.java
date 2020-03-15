@@ -16,6 +16,7 @@ import com.mimacom.taskmanager.config.JwtTokenUtil;
 import com.mimacom.taskmanager.controller.dto.UserDTO;
 import com.mimacom.taskmanager.model.JwtResponse;
 import com.mimacom.taskmanager.model.Task;
+import com.mimacom.taskmanager.model.User;
 import com.mimacom.taskmanager.service.JwtUserDetailsService;
 
 import io.swagger.annotations.Api;
@@ -45,6 +46,17 @@ public class JwtAuthenticationController {
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 		final String token = jwtTokenUtil.generateToken(userDetails);
 		return ResponseEntity.ok(new JwtResponse(token));
+	}
+	
+	@PostMapping(value = "/register")
+	@ApiOperation(value="Registers new user", response=User.class)
+	@ApiResponses(value= {
+			@ApiResponse(code=200, message="Succesfully registered"),
+			@ApiResponse(code=500, message="Server error")
+	})
+	public ResponseEntity<User> registerUser(@RequestBody UserDTO userDTO) throws Exception {
+		User user = userDetailsService.registerUser(userDTO);
+		return user == null? ResponseEntity.notFound().build() : ResponseEntity.ok(user);	
 	}
 
 	private void authenticate(String username, String password) throws Exception {
